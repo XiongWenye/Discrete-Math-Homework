@@ -1,4 +1,4 @@
-def SquareAndMutilpy(a, e, n):
+def SquareAndMutiply(a, e, n):
     b = bin(e)[2:]
     b = b[::-1]
     ans = 1
@@ -9,4 +9,4 @@ def SquareAndMutilpy(a, e, n):
     return ans
 
 base, exponent, modulus = map(int, input().split())
-print(SquareAndMutilpy(base, exponent, modulus))
+print(SquareAndMutiply(base, exponent, modulus))

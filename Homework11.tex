@@ -1,0 +1,159 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{subfigure} 
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{seqsplit}
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=C++,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+\author{Wenye Xiong 2023533141}
+\title{Homework 11}
+\begin{document}
+\maketitle
+\section{Problem 1}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{graph.jpg}
+\end{figure}
+\section{Problem 2}
+No, there cannot exist such a graph. According to the Handshaking Theorem, the sum of the degrees of the vertices in a graph is equal to twice the number of edges. In this case, the sum of the degrees of the ten given vertices is 1 * 3 + 4 * 7 = 31, so it follows that the sum of the degrees of the other three vertices must be 31. Thus, at least one of $v_1, v_2, v_3$ has degree at least 11. We consider the two following cases:\\
+\\ \hspace*{\fill} \\
+(1): There is a vertex of degree 12:\\
+Assume that $deg(v_1) = 12$. Then $v_1$ is adjacent to all other vertices, in particular to all the three vertices of degree one. Since these three vertices of degree 1 cannot be joined to any other vertex, the degree of any other vertex is at most nine. Thus $12 + 9 + 9 = 30 < 31$, which is a contradiction. This case is impossible.\\
+\\ \hspace*{\fill} \\
+(2): There is no vertex of degree 12:\\
+Assume that $deg(v_1) = 11$. Then $v_1$ must be adjacent to at least two of the vertices of degree one. Since these two vertices of degree one cannot be joined to any other vertex, the degree of any other vertex is at most 10. For $v_2$ and $v_3$, if one of them has degree 10, then it would be joined to the third vertex of degree one, and the final vertex would be of degree at most 9. This is impossible because $11 + 10 + 9 = 30 < 31$. This makes a contradiction.
+\section{Problem 3}
+Since the sum of the degrees of the vertices in a graph is equal to twice the number of edges, we have that 2e = $\sum_{i=1}^{v} d_i$, where $d_i$ is the degree of the ith vertex. Since the minimum degree of the vertices of G is m, we have that $\sum_{i=1}^{v} d_i \geq vm$. Therefore, 2e = $\sum_{i=1}^{v} d_i \geq vm$, so 2e/v $\geq$ m.\\
+\\ \hspace*{\fill} \\
+Since the sum of the degrees of the vertices in a graph is equal to twice the number of edges, we have that 2e = $\sum_{i=1}^{v} d_i$, where $d_i$ is the degree of the ith vertex. Since the maximum degree of the vertices of G is M, we have that $\sum_{i=1}^{v} d_i \leq vM$. Therefore, 2e = $\sum_{i=1}^{v} d_i \leq vM$, so 2e/v $\leq$ M.\\
+\section{Problem 4}
+\begin{matrix}
+G1 : & \begin{bmatrix}
+  & a & b & c & d\\
+a & 0 & 1 & 1 & 0\\
+b & 1 & 0 & 1 & 1\\
+c & 1 & 1 & 0 & 0\\
+d & 0 & 1 & 0 & 0\\
+\end{bmatrix}
+G2 : & \begin{bmatrix}
+  & a & b & c & d\\
+a & 0 & 0 & 1 & 0\\
+b & 0 & 0 & 1 & 2\\
+c & 1 & 1 & 0 & 1\\
+d & 0 & 2 & 1 & 0\\
+\end{bmatrix}\\
+\\ \hspace*{\fill} \\
+G3 : & \begin{bmatrix}
+  & a & b & c & d & e\\
+a & 0 & 1 & 0 & 0 & 0\\
+b & 0 & 0 & 1 & 0 & 0\\
+c & 0 & 0 & 0 & 1 & 0\\
+d & 0 & 0 & 0 & 0 & 1\\
+e & 1 & 0 & 0 & 0 & 0\\
+\end{bmatrix}
+G4 : & \begin{bmatrix}
+  & a & b & c & d\\
+a & 1 & 1 & 1 & 1\\
+b & 0 & 0 & 0 & 1\\
+c & 1 & 1 & 0 & 0\\
+d & 0 & 1 & 1 & 1\\
+\end{bmatrix}\\
+\\ \hspace*{\fill} \\
+K4 : & \begin{bmatrix}
+  & a & b & c & d\\
+a & 0 & 1 & 1 & 1\\
+b & 1 & 0 & 1 & 1\\
+c & 1 & 1 & 0 & 1\\
+d & 1 & 1 & 1 & 0\\
+\end{bmatrix}\\
+\\ \hspace*{\fill} \\
+C7 : & \begin{bmatrix}
+  & a & b & c & d & e & f & g\\
+a & 0 & 1 & 0 & 0 & 0 & 0 & 1\\
+b & 1 & 0 & 1 & 0 & 0 & 0 & 0\\
+c & 0 & 1 & 0 & 1 & 0 & 0 & 0\\
+d & 0 & 0 & 1 & 0 & 1 & 0 & 0\\
+e & 0 & 0 & 0 & 1 & 0 & 1 & 0\\
+f & 0 & 0 & 0 & 0 & 1 & 0 & 1\\
+g & 1 & 0 & 0 & 0 & 0 & 1 & 0\\
+\end{bmatrix}\\
+\\ \hspace*{\fill} \\
+K3,3 : & \begin{bmatrix}
+  & a & b & c & d & e & f\\
+a & 0 & 0 & 0 & 1 & 1 & 1\\
+b & 0 & 0 & 0 & 1 & 1 & 1\\
+c & 0 & 0 & 0 & 1 & 1 & 1\\
+d & 1 & 1 & 1 & 0 & 0 & 0\\
+e & 1 & 1 & 1 & 0 & 0 & 0\\
+f & 1 & 1 & 1 & 0 & 0 & 0\\
+\end{bmatrix}\\
+\end{matrix}
+\newpage
+\section{Problem 5}
+(a):\\
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{p1.jpg}
+\end{figure}
+(b):\\
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{p2.jpg}
+\end{figure}
+\section{Problem 6}
+H1 and H2 are isomorphic. We can find the isomorphism $\sigma$ as follows:\\
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+a & b & c & d & e & f\\
+u & x & z & w & y & v\\
+\hline
+\end{tabular}
+\end{table}
+H1 and H3 are not isomorphic. We can see that in H3, h is adjacent to two vertices of degree 3 (k,j). While in H1, there is no such vertex.\\
+\\ \hspace*{\fill} \\
+H4 and H5 are not isomorphic. We can see that in H4, there is only one vertex of degree 5 (f), while in H5, there are two vertices of degree 5 (y,w).\\
+\section{Problem 7}
+For Complete Graph $K_n$, when $n = 2$, the graph is obviously bipartite since it only has two vertices. But when it comes to $n = 3$, the graph is not bipartite since it is in the shape of a triangle. For the three vertices, if we color two of them in different types, the other one will always be adjacent to both of them. Therefore, the graph is not bipartite. So for n = 1, 2, the graph is bipartite.\\
+\\ \hspace*{\fill} \\
+For Cycle Graph $C_n$, When $n = 3$, the graph is not bipartite since it is exactly the same as the triangle in $K_3$. So there is no n such that $C_n$ is bipartite.\\
+\\ \hspace*{\fill} \\
+For Wheel Graph $W_n$, when $n = 3$, the graph is not bipartite since it can be seen as the combination of three same triangles. So there is no n such that $W_n$ is bipartite.\\
+\\ \hspace*{\fill} \\
+For n-Cubes $Q_n$, $Q_n$ is bipartite for all n.\\
+This can be shown by dividing the vertices into two sets: one containing all vertices with an even number of 1s, and the other containing all vertices with an odd number of 1s. All edges connect vertices between these two sets, satisfying the bipartite property.
+\section{Problem 8}
+Let the two sets of vertices in the bipartite graph be A and B. Let $|A| = a$ and $|B| = b$. Since the graph is bipartite, all edges connect vertices between A and B. Therefore, the number of edges in the graph is at most $ab$. Since $a + b = n$, and we have that $ab \leq (\frac{a+b}{2})^2 = \frac{n^2}{4}$, the number of edges in a bipartite graph with n vertices is at most $\frac{n^2}{4}$.
+\section{Problem 9}
+(a): $M = \{ au, bx, cy \}$\\
+\\ \hspace*{\fill} \\
+(b): G is a bipartite graph. So we can describe the partition of vertices into two disjoints sets $V_1 = \{ a, b, c, d, e \}$ and $V_2 = \{ t, u, v, w, x, y, z \}$.\\
+\\ \hspace*{\fill} \\
+There doesn't exist a complete match from $V_1$ to $V_2$. This because for the subsets $\{ a, b, e\}$ in $V_1$, all of them are only adjacent to two vertices in $V_2$, u and x. So we can never find a complete match from a sets with three vertices to a set with two vertices.\\
+\\ \hspace*{\fill} \\
+Samely, there doesn't exist a complete match from $V_2$ to $V_1$. Since you can never find a complete match from a set with seven vertices to a set with five vertices.\\
+\end{document}
+

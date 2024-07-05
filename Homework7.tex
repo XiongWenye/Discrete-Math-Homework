@@ -1,0 +1,258 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{subfigure} 
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{seqsplit}
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=C++,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+\author{Wenye Xiong 2023533141}
+\title{Homework 7}
+\begin{document}
+\maketitle
+\section{Problem 1}
+To prove that $S_2(n,n-2) = 
+\begin{pmatrix}
+n\\
+3
+\end{pmatrix} + 3 \cdot
+\begin{pmatrix}
+n\\
+4
+\end{pmatrix}$ for $n \geq 3$, we can use the definition of Stirling number of the second kind. We know that $S_2(n,n-2)$ is the number of ways to partition a set of $n$ labeled elements into $n-2$ unlabeled and nonempty subsets.\\
+\\ \hspace*{\fill} \\
+To partition n labeled elements into n-2 unlabeled and nonempty subsets, we can consider two ways of partition: \\
+\\ \hspace*{\fill} \\
+1. Choose 3 elements from n elements and put them into one subset, then partition the rest n-3 elements into n-3 subsets. There are $\begin{pmatrix}
+n\\
+3
+\end{pmatrix}$ ways to choose 3 elements from n elements.\\
+\\ \hspace*{\fill} \\
+2. Choose 2 elements from n elements and put them into one subset, and then another 2 elements into one subset. Finally, partition the rest n-4 elements into n-4 subsets. There are $\begin{pmatrix}
+n\\
+4
+\end{pmatrix}$ ways to choose 4 elements from n elements. Then we consider dividing the 4 elements into two pairs: For a certain element, it can choose any of the rest three elements to form a pair. Once the pair is determined, the case is settled. So there are $\begin{pmatrix}
+3\\
+1
+\end{pmatrix}$ ways to form two pairs. And the total number of ways in this situation is $ 3 \cdot \begin{pmatrix}
+n\\
+4
+\end{pmatrix}$.\\
+\\ \hspace*{\fill} \\
+Hence, $S_2(n,n-2) =
+\begin{pmatrix}
+n\\
+3
+\end{pmatrix} + 3 \cdot
+\begin{pmatrix}
+n\\
+4
+\end{pmatrix}$ for $n \geq 3$.
+\newpage
+\section{Problem 2}
+Consider the first n elements, we only have two cases: Firstly, if these n elements are partitioned into k-1 nonempty subsets, then the last element can only be put into the last subset. So in this case, we have $S_2(n,k-1)$ ways.\\
+\\ \hspace*{\fill} \\
+Or if the first n elements are partitioned into k nonempty subsets, then the last element can be put into any of the k subsets. So in this case, we have $k \cdot S_2(n,k)$ ways.\\
+\\ \hspace*{\fill} \\
+Hence, we have $S_2(n+1,k) = S_2(n,k-1) + k \cdot S_2(n,k)$.
+\section{Problem 3}
+$p_3(n) = p_3(3 + n - 3) = p_1(n-3) + p_2(n-3) + p_3(n-3)$\\
+\\ \hspace*{\fill} \\
+$p_1(n-3) = 1$\\
+$p_2(n-3) = \frac{n-3}{2}$ if n is an odd number, $\frac{n-4}{2}$ if n-3 is an even number.\\
+$p_3(n-3) = p_1(n-6) + p_2(n-6) + p_3(n-6)$\\
+\\ \hspace*{\fill} \\
+$p_1(n-6) = 1$\\
+$p_2(n-6) = \frac{n-6}{2}$ if n is an even number, $\frac{n-7}{2}$ if n is an odd number.\\
+\\ \hspace*{\fill} \\
+If n is an odd number, $p_3(n) = 1 + \frac{n-3}{2} + 1 + \frac{n-7}{2} + p_3(n-6) = p_3(n-6) + n - 3 $\\
+If n is an even number, $p_3(n) = 1 + \frac{n-4}{2} + 1 + \frac{n-6}{2} + p_3(n-6) = p_3(n-6) + n - 3 $\\
+\\ \hspace*{\fill} \\
+Hence, $p_3(n) = p_3(n-6) + n - 3$.
+\newpage
+\section{Problem 4}
+Consider n=2k and n=2k+1 separately, where k is an integer no smaller than 2.\\
+\\ \hspace*{\fill} \\
+For n=2k, we have $a_{2k} = 8a_{2{k-1}} - 16a_{2(k-2)}$\\
+\\ \hspace*{\fill} \\
+Consider the characteristic equation $r^2 - 8r + 16 = 0$, we have $r1 = 4$\\
+\\ \hspace*{\fill} \\
+So $a_{2k} = a_{1,0}4^k + a_{1,1}k4^k$\\
+\\ \hspace*{\fill} \\
+$a_0 = 3 = a_{1,0}$\\
+$a_2 = 44 = 4a_{1,0} + 4a_{1,1}$\\
+\\ \hspace*{\fill} \\
+So $a_{1,0} = 3$ and $a_{1,1} = 8$\\
+\\ \hspace*{\fill} \\
+Hence, $a_{2k} = 3 \cdot 4^k + 8k \cdot 4^k$, and so $a_n = (4n + 3) 2^n$ when n is an even number\\
+\\ \hspace*{\fill} \\
+For n=2k+1, we have $a_{2k+1} = 8a_{2(k-1) + 1} - 16a_{2(k-2) + 1}$\\
+\\ \hspace*{\fill} \\
+Consider the characteristic equation $r^2 - 8r + 16 = 0$, we have $r2 = 4$\\
+\\ \hspace*{\fill} \\
+So $a_{2k+1} = a_{2,0}4^k + a_{2,1}k4^k$\\
+\\ \hspace*{\fill} \\
+$a_1 = 6 = a_{2,0}$\\
+$a_3 = 56 = 4a_{2,0} + 4a_{2,1}$\\
+\\ \hspace*{\fill} \\
+So $a_{2,0} = 6$ and $a_{2,1} = 8$\\
+\\ \hspace*{\fill} \\
+Hence, $a_{2k+1} = 6 \cdot 4^k + 8k \cdot 4^k$, and so $a_n = (4n + 2) 2^{n-1}$ when n is an odd number\\
+\\ \hspace*{\fill} \\
+Hence, $a_n = (4n + 3) 2^n$ when n is an even number, and $a_n = (4n + 2) 2^{n-1}$ when n is an odd number.
+\newpage
+\section{Problem 5}
+For the LNRR $a_n = 3a_{n-1} - 2a_{n-2} + n \cdot 2^n (n \geq 2)$, consider the characteristic equation of associated LHRR $r^2 - 3r + 2 = 0$, we have $r1 = 1$ and $r2 = 2$.\\
+\\ \hspace*{\fill} \\
+The particular solution of the LNRR is $x_n = (p_1n + p_0) 2^n n$\\
+\\ \hspace*{\fill} \\
+General solution of the associated LHRR is $y_n = a_{1,0} + a_{1,1}2^n$\\
+\\ \hspace*{\fill} \\
+So $a_n = a_{1,0} + (p_1n^2 + p_0n + a_{1,1}) 2^n$\\
+\\ \hspace*{\fill} \\
+$a_0 = 1 = a_{1,0} + a_{1,1}$\\
+$a_1 = -1 = a_{1,0} + 2a_{1,1} + 2p_1 + 2p_0$\\
+$a_2 = -3 - 2 + 8 = 3 = a_{1,0} + 4a_{1,1} + 16p_1 + 8p_0$\\
+$a_3 = 9 + 2 + 24 = 35 = a_{1,0} + 8a_{1,1} + 72p_1 + 24p_0$\\
+\\ \hspace*{\fill} \\
+So $a_{1,0} = 3, a_{1,1} = -2, p_0 = -1, p_1 = 1$\\
+\\ \hspace*{\fill} \\
+Hence, $a_n = 3 + (n^2 - n - 2)2^n$.
+\newpage
+\section{Problem 6}
+Let $S(n,i) = \sum_{k=0}^{n} k^i$\\
+\\ \hspace*{\fill} \\
+First, we have $(n+1)^6 = \sum_{i=0}^{6} \begin{pmatrix}
+6\\
+i
+\end{pmatrix} n^i$\\
+\\ \hspace*{\fill} \\
+So $(n+1)^6 - n^6 = \begin{pmatrix}
+6\\
+5
+\end{pmatrix} n^5 + \begin{pmatrix}
+6\\
+4
+\end{pmatrix} n^4 + \begin{pmatrix}
+6\\
+3
+\end{pmatrix} n^3 + \begin{pmatrix}
+6\\
+2
+\end{pmatrix} n^2 + \begin{pmatrix}
+6\\
+1
+\end{pmatrix} n + 1$\\
+\\ \hspace*{\fill} \\
+$n^6 - (n-1)^6 = \begin{pmatrix}
+6\\
+5
+\end{pmatrix} (n-1)^5 + \begin{pmatrix}
+6\\
+4
+\end{pmatrix} (n-1)^4 + \begin{pmatrix}
+6\\
+3
+\end{pmatrix} (n-1)^3 + \begin{pmatrix}
+6\\
+2
+\end{pmatrix} (n-1)^2 + \begin{pmatrix}
+6\\
+1
+\end{pmatrix} (n-1) + 1$\\
+\\ \hspace*{\fill} \\
+.......
+\\ \hspace*{\fill} \\
+$2^6 - 1 = \begin{pmatrix}
+6\\
+5
+\end{pmatrix} + \begin{pmatrix}
+6\\
+4
+\end{pmatrix} + \begin{pmatrix}
+6\\
+3
+\end{pmatrix} + \begin{pmatrix}
+6\\
+2
+\end{pmatrix} + \begin{pmatrix}
+6\\
+1
+\end{pmatrix} + 1$\\
+\\ \hspace*{\fill} \\
+Hence, $(n+1)^6 - 1 = 6S(n,5) + \sum_{i=0}^{4} \begin{pmatrix}
+6\\
+i
+\end{pmatrix} S(n,i)$\\
+\\ \hspace*{\fill} \\
+So $S(n,5) = \frac{1}{6}((n+1)^6 - 1 - \sum_{i=0}^{4} \begin{pmatrix}
+6\\
+i
+\end{pmatrix} S(n,i))$\\
+\\ \hspace*{\fill} \\
+$S(n,1) = \frac{n(n+1)}{2} = \frac{1}{2}n^2 + \frac{1}{2}n$\\
+\\ \hspace*{\fill} \\
+$S(n,2) = \frac{1}{3}((n+1)^3 - 1 - n - 3S(n,1)) = \frac{1}{3}n^3 + \frac{1}{2}n^2 + \frac{1}{6}n$\\
+\\ \hspace*{\fill} \\
+$S(n,3) = \frac{1}{4}((n+1)^4 - 1 - n - 4S(n,1) - 6S(n,2)) = \frac{1}{4}n^4 + \frac{1}{2}n^3 + \frac{1}{4}n^2$\\
+\\ \hspace*{\fill} \\
+$S(n,4) = \frac{1}{5}((n+1)^5 - 1 - n - 5S(n,1) - 10S(n,2) - 10S(n,3)) = \frac{1}{5}n^5 + \frac{1}{2}n^4 + \frac{1}{3}n^3 - \frac{1}{30}n$\\
+\\ \hspace*{\fill} \\
+$S(n,5) = \frac{1}{6}((n+1)^6 - 1 - n - 6S(n,1) - 15S(n,2) - 20S(n,3) - 15S(n,4)) = \frac{1}{6}n^6 + \frac{1}{2}n^5 + \frac{5}{12}n^4 - \frac{1}{12}n^2$\\
+\\ \hspace*{\fill} \\
+Hence, $S(n,5) = \frac{1}{6}n^6 + \frac{1}{2}n^5 + \frac{5}{12}n^4 - \frac{1}{12}n^2$.
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

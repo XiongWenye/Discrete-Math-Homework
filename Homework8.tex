@@ -1,0 +1,238 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{subfigure} 
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{seqsplit}
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=C++,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+\author{Wenye Xiong 2023533141}
+\title{Homework 8}
+\begin{document}
+\maketitle
+\section{Problem 1}
+The truth table for $ p \rightarrow \neg q \vee r \rightarrow (\neg r \rightarrow s \wedge p)$ is shown below:\\
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+$q$ & $r$ & $s$ & $p$ & $ p \rightarrow \neg q \vee r \rightarrow (\neg r \rightarrow s \wedge p)$\\
+\hline
+F & F & F & F & T\\
+F & F & F & T & T\\
+F & F & T & F & T\\
+F & F & T & T & T\\
+F & T & F & F & T\\
+F & T & F & T & T\\
+F & T & T & F & T\\
+F & T & T & T & T\\
+T & F & F & F & F\\
+T & F & F & T & T\\
+T & F & T & F & T\\
+T & F & T & T & T\\
+T & T & F & F & T\\
+T & T & F & T & T\\
+T & T & T & F & T\\
+T & T & T & T & T\\
+\hline
+\end{tabular}
+\end{table}
+\section{Problem 2}
+(1): The truth table for the formula $((p \vee q) \wedge (r \vee s)) \rightarrow (((p \rightarrow q) \vee (p \rightarrow r)) \wedge ((q \rightarrow p) \vee (q \rightarrow p)))$ is:\\
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+$p$ & $q$ & $r$ & $s$ &  $((p \vee q) \wedge (r \vee s)) \rightarrow (((p \rightarrow q) \vee (p \rightarrow r)) \wedge ((q \rightarrow p) \vee (q \rightarrow p)))$\\ 
+\hline
+F & F & F & F & T\\
+F & F & F & T & T\\
+F & F & T & F & T\\
+F & F & T & T & T\\
+F & T & F & F & T\\
+F & T & F & T & F\\
+F & T & T & F & F\\
+F & T & T & T & F\\
+T & F & F & F & T\\
+T & F & F & T & F\\
+T & F & T & F & T\\
+T & F & T & T & T\\
+T & T & F & F & T\\
+T & T & F & T & T\\
+T & T & T & F & T\\
+T & T & T & T & T\\
+\hline
+\end{tabular}
+\end{table}
+So the formula is a contingency.\\
+(2): The truth table for the formula $(\neg (p \leftrightarrow q) \rightarrow ((p \wedge \neg q) \vee (\neg p \wedge q))) \vee r$ is:\\
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+$p$ & $q$ & $r$ & $\neg (p \leftrightarrow q) \rightarrow ((p \wedge \neg q) \vee (\neg p \wedge q)) \vee r$\\
+\hline
+F & F & F & T\\
+F & F & T & T\\
+F & T & F & T\\
+F & T & T & T\\
+T & F & F & T\\
+T & F & T & T\\
+T & T & F & T\\
+T & T & T & T\\
+\hline
+\end{tabular}
+\end{table}
+So the formula is a tautology.\\
+(3): The truth table for the formula $ ((p \rightarrow r) \wedge (q \rightarrow s) \wedge (p \vee q)) \rightarrow (r \vee s)$ is:\\
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+$p$ & $q$ & $r$ & $s$ & $((p \rightarrow r) \wedge (q \rightarrow s) \wedge (p \vee q)) \rightarrow (r \vee s)$\\
+\hline
+F & F & F & F & T\\
+F & F & F & T & T\\
+F & F & T & F & T\\
+F & F & T & T & T\\
+F & T & F & F & T\\
+F & T & F & T & T\\
+F & T & T & F & T\\
+F & T & T & T & T\\
+T & F & F & F & T\\
+T & F & F & T & T\\
+T & F & T & F & T\\
+T & F & T & T & T\\
+T & T & F & F & T\\
+T & T & F & T & T\\
+T & T & T & F & T\\
+T & T & T & T & T\\
+\hline
+\end{tabular}
+\end{table}
+So the formula is a tautology.\\
+\section{Problem 3}
+(1): $(B \vee A) \rightarrow C$\\
+(2): $((A \rightarrow C) \wedge (\neg A)) \rightarrow ((\neg B) \vee (\neg C))$\\
+\section{Problem 4}
+(1): A: "x**y is valid Python", B: "x is a numeric number", C: "y is a numeric number". The logical notation is: $A \leftrightarrow (B \wedge C)$.\\
+\\ \hspace*{\fill} \\
+(2): A: "x + y is valid Python", B: "x is a numeric number", C: "y is a numeric number", D: "x is a list", E: "y is a list". The logical notation is: $A \leftrightarrow ((B \wedge C) \vee (D \wedge E))$.\\
+\\ \hspace*{\fill} \\
+(3): A: "x * y is valid Python", B: "x is a numeric number", C: "y is a numeric number", D: "x is a list", E: "y is a list". The logical notation is: $A \leftrightarrow ((B \wedge C) \vee (D \wedge C) \vee (E \wedge B))$.\\
+\\ \hspace*{\fill} \\
+(4): A: "x * y is a list", B: "x * y is valid Python", C: "x is a numeric number", D: "y is a numeric number". The logical notation is: $(B \wedge (\neg (C \wedge D))) \rightarrow A$.\\
+\\ \hspace*{\fill} \\
+(5): A: "x + y is valid Python", B: "x ** y is valid Python", C: "x is a list". The logical notation is: $(A \wedge B) \rightarrow (\neg C)$.\\
+\section{Problem 5}
+(1): $(p \rightarrow \neg p) \rightarrow (p \rightarrow q)$\\
+\\ \hspace*{\fill} \\
+(2): $(p \rightarrow (\neg p \rightarrow p)) \rightarrow q$\\
+\section{Problem 6}
+(1): To prove that $A \oplus B \leftrightarrow \neg (A \leftrightarrow B)$ is a tautology, let's consider the truth table for $A \oplus B$ and $\neg (A \leftrightarrow B)$:\\
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+$A$ & $B$ & $A \oplus B$ & $\neg (A \leftrightarrow B)$\\
+\hline
+F & F & F & F\\
+F & T & T & T\\
+T & F & T & T\\
+T & T & F & F\\
+\hline
+\end{tabular}
+\end{table}
+So $A \oplus B \leftrightarrow \neg (A \leftrightarrow B)$ is a tautology.\\
+\\ \hspace*{\fill} \\
+(2): A = "You may contact me by phone", B = "You may contact me by email", C = "I am available for an on-site interview on October 8th in Minneapolis", D = "I am available for an on-site interview on October 8th in Hong Kong". The logical notation is: $(A \vee B) \wedge (C \oplus D)$.\\
+\section{Problem 7}
+$A_1 = p \wedge q \wedge r$\\
+$A_2 = p \wedge q \wedge \neg r$\\
+$A_3 = p \wedge \neg q \wedge r$\\
+$A_4 = p \wedge \neg q \wedge \neg r$\\
+$A_5 = \neg p \wedge q \wedge r$\\
+$A_6 = \neg p \wedge q \wedge \neg r$\\
+$A_7 = \neg p \wedge \neg q \wedge r$\\
+$A_8 = \neg p \wedge \neg q \wedge \neg r$\\
+$A = A_2 \vee A_4 \vee A_6 \vee A_7 \vee A_8$\\
+\section{Problem 8}
+$A = (p \wedge q) \vee (\neg p \wedge q \wedge r)$, $B = (p \vee (q \wedge r)) \wedge (q \vee (\neg p \wedge r))$\\
+\\ \hspace*{\fill} \\
+$A \equiv (p \wedge q) \vee (\neg p \wedge q \wedge r) \\
+\equiv (p \vee (\neg p \wedge q \wedge r)) \wedge (q \vee (\neg p \wedge q \wedge r))\\
+ \equiv  (p \vee \neg p) \wedge (p \vee (q \wedge r)) \wedge (q \vee (\neg p \wedge r))\\
+  \equiv (p \vee (q \wedge r)) \wedge (q \vee (\neg p \wedge r)) \equiv B$\\
+\section{Problem 9}
+(1): To show that $(p \rightarrow q) \wedge (r \rightarrow s) \rightarrow ((p \wedge r) \rightarrow (q \wedge s))$ is a tautology, we are going to rewrite this to T:\\
+$(p \rightarrow q) \wedge (r \rightarrow s) \rightarrow ((p \wedge r) \rightarrow (q \wedge s))
+\leftrightarrow (\neg p \vee q) \wedge (\neg r \vee s) \rightarrow \neg (p \wedge r) \vee (q \wedge s)\\
+\leftrightarrow (\neg p \vee q) \wedge (\neg r \vee s) \rightarrow (\neg p \vee \neg r) \vee (q \wedge s)\\
+\leftrightarrow (\neg p \vee q) \wedge (\neg r \vee s) \rightarrow (\neg p \vee \neg r \vee q) \wedge (\neg p \vee \neg r \vee s)\\
+\leftrightarrow (\neg p \vee q) \wedge (\neg r \vee s) \rightarrow ((\neg p \vee q) \wedge (\neg r \vee s)) \vee (\neg p \vee \neg r)\\
+\leftrightarrow \neg ((\neg p \vee q) \wedge (\neg r \vee s)) \vee ((\neg p \vee q) \wedge (\neg r \vee s)) \vee (\neg p \vee \neg r)\\
+\leftrightarrow T \vee (\neg p \vee \neg r) \equiv T\\
+
+
+$
+(2): To show that $(p \rightarrow q) \wedge (r \rightarrow s) \rightarrow ((p \wedge r) \rightarrow (q \wedge s))$ is a tautology, we are going to rewrite this to T:\\
+$
+((p \vee q) \wedge (p \rightarrow r) \wedge (q \rightarrow r)) \rightarrow r\\
+ \leftrightarrow ((p \vee q) \wedge ( \neg p \vee r) \wedge ( \neg q \vee r)) \rightarrow r\\
+ \leftrightarrow  \neg((p \vee q) \wedge ( \neg p \vee r) \wedge ( \neg q \vee r)) \vee r\\
+ \leftrightarrow  \neg(p \vee q) \vee  \neg( \neg p \vee r) \vee  \neg( \neg q \vee r) \vee r\\
+ \leftrightarrow ( \neg p \wedge  \neg q) \vee ( \neg \neg p \wedge  \neg r) \vee ( \neg \neg q \wedge  \neg r) \vee r\\
+ \leftrightarrow ( \neg p \wedge  \neg q) \vee (p \wedge  \neg r) \vee (q \wedge  \neg r) \vee r\\
+ \leftrightarrow ( \neg p \wedge  \neg q) \vee (p \wedge  \neg r) \vee ((q \vee r) \wedge ( \neg r \vee r))\\
+ \leftrightarrow ( \neg p \wedge  \neg q) \vee (p \wedge  \neg r) \vee ((q \vee r) \wedge T)\\
+ \leftrightarrow ( \neg p \wedge  \neg q) \vee (p \wedge  \neg r) \vee q \vee r\\
+ \leftrightarrow ( \neg p \wedge  \neg q) \vee (p \wedge  \neg r) \vee r \vee q\\
+ \leftrightarrow ( \neg p \wedge  \neg q) \vee ((p \vee r) \wedge ( \neg r \vee r)) \vee q\\
+ \leftrightarrow ( \neg p \wedge  \neg q) \vee ((p \vee r) \wedge T) \vee q\\
+ \leftrightarrow ( \neg p \wedge  \neg q) \vee p \vee r \vee q\\
+ \leftrightarrow (( \neg p \vee p) \wedge ( \neg q \vee p)) \vee r \vee q\\
+ \leftrightarrow (T \wedge ( \neg q \vee p)) \vee r \vee q\\
+ \leftrightarrow  \neg q \vee p \vee r \vee q\\
+ \leftrightarrow  \neg q \vee q \vee p \vee r\\
+ \leftrightarrow T \vee p \vee r\\
+ \leftrightarrow T\\
+$
+\section{Problem 10}
+You should ask: "What path would the other type of person tell me is the correct one?" And then always choose the opposite one to go.\\
+P: The man is a knight, R: The way he told me is to turn left. Q: The correct way is to turn left. And here's the truth table for the problem:\\
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+P & Q & R\\
+\hline
+T & T & F\\
+T & F & T\\
+F & T & F\\
+F & F & T\\
+\hline
+\end{tabular}
+\end{table}
+
+\end{document}

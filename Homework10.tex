@@ -1,0 +1,151 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{subfigure} 
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{seqsplit}
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=C++,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+\author{Wenye Xiong 2023533141}
+\title{Homework 10}
+\begin{document}
+\maketitle
+\section{Problem 1}
+(a): “Every student sends a message to some other student in DS class.”\\
+This can be translated into the following formula:\\
+$\forall x (P(x) \rightarrow \exists y (P(y) \wedge \neg E(x,y) \wedge L(x,y)))$\\
+\\ \hspace*{\fill} \\
+(b) “There is a student who is sent a message by every other student in DS class.”\\
+This can be translated into the following formula:\\
+$\exists x (P(x) \wedge \forall y (P(y) \wedge \neg E(y,x) \wedge L(y,x)))$\\
+\\ \hspace*{\fill} \\
+\section{Problem 2}
+(a): If $D_1 = \emptyset$, then A is vacuously true because the function is in the form of universial quantification, there are no elements to falsify the formula.\\
+\\ \hspace*{\fill} \\
+(b): Let $D_2 = \{1,2,3\}$. We can choose $x = 1$ and $y = 2$. The formula $x \neq  y$ is true, and $\forall z ((z = x) \vee (z = y))$ must be true. However, letting $z = 3$ will make the formula false, thus falsifying A.\\
+\\ \hspace*{\fill} \\
+\section{Problem 3}
+(a): $(\exists x P(x) \rightarrow \exists x Q(x)) \rightarrow \exists x (P(x) \rightarrow Q(x))$\\
+This formula is logically valid. We can prove this by proving its substitue is a tautology.\\
+$(\exists x P(x) \rightarrow \exists y Q(y)) \rightarrow \exists z (P(z) \rightarrow Q(z))$\\
+$\equiv \neg (\exists x P(x) \rightarrow \exists y Q(y)) \vee \exists z (P(z) \rightarrow Q(z))$\\
+$\equiv \neg (\neg \exists x P(x) \vee \exists y Q(y)) \vee \exists z (\neg P(z) \vee Q(z))$\\
+$\equiv \exists x P(x) \wedge \neg \exists y Q(y) \vee \exists z (\neg P(z) \vee Q(z))$\\
+$\equiv \exists x P(x) \wedge \forall y \neg Q(y) \vee \exists z (\neg P(z) \vee Q(z))$\\
+$\equiv \exists x P(x) \wedge \forall y \neg Q(y) \vee \exists z \neg P(z) \vee \exists z Q(z)$\\
+$\equiv \exists x P(x) \wedge \forall y \neg Q(y) \vee \exists z \neg P(z) \vee Q(z)$\\
+$\equiv \exists x P(x) \wedge \forall y \neg Q(y) \vee \neg \forall z P(z) \vee Q(z)$\\
+$\equiv (\exists x P(x) \vee \neg \forall z P(z) \vee \exists z Q(z)) \wedge (\forall y \neg Q(y) \vee \neg \forall z P(z) \vee \exists z Q(z))$\\
+$\equiv (\exists x True \vee \exists z Q(z)) \wedge (True \vee \neg \forall z P(z))$\\
+$\equiv True$\\
+So the original formula is logically valid.\\
+\\ \hspace*{\fill} \\
+(b): $\forall x (P(x) \vee \neg \exists y (Q(y) \wedge \neg Q(y)))$\\
+This formula is logically valid. The inner part of the formula $Q(y) \wedge \neg Q(y)$ is always false, so $\neg \exists y (Q(y) \wedge \neg Q(y))$ is always true. Thus, $P(x) \vee True$ is always true, and the formula is logically valid.\\
+\\ \hspace*{\fill} \\
+\section{Problem 4}
+(a): Consider a domain with only two elements $D = \{a,b\}$. Let $P(a) = True$ and $P(b) = False$. Let $Q(a) = False$ and $Q(b) = True$. The formula $\forall x (P(x) \vee Q(x))$ is obviously true. However, the formula $\forall x P(x) \vee \forall x Q(x)$ is false, because $\forall x P(x)$ is false and $\forall x Q(x)$ is false. So the two formulas are not logically equivalent.\\
+\\ \hspace*{\fill} \\
+(b): Consider the same domain with only two elements $D = \{a,b\}$. Let $P(a) = True$ and $P(b) = False$. Let $Q(a) = False$ and $Q(b) = True$. The formula $\forall x (P(x) \wedge Q(x))$ is false. However, the formula $\forall x P(x) \wedge \forall x Q(x)$ is true, because $\forall x P(x)$ is true and $\forall x Q(x)$ is true. So the two formulas are not logically equivalent.\\
+\\ \hspace*{\fill} \\
+\section{Problem 5}
+$\exists x (P(x) \vee Q(x)) \equiv \exists x P(x) \vee \exists x Q(x)$\\
+To prove it, we have to prove $\exists x (P(x) \vee Q(x)) \rightarrow \exists x P(x) \vee \exists x Q(x)$ and $\exists x P(x) \vee \exists x Q(x) \rightarrow \exists x (P(x) \vee Q(x))$\\
+\\ \hspace*{\fill} \\
+First we prove$\exists x (P(x) \vee Q(x)) \rightarrow \exists x P(x) \vee \exists x Q(x)$: \\
+Assume $\exists x (P(x) \vee Q(x))$ is true. Then there exists an element $a$ in the domain such that $P(a) \vee Q(a)$ is true. If $P(a)$ is true, then $\exists x P(x)$ is true. If $Q(a)$ is true, then $\exists x Q(x)$ is true. So $\exists x P(x) \vee \exists x Q(x)$ is true.\\
+\\ \hspace*{\fill} \\
+Second we prove $\exists x P(x) \vee \exists x Q(x) \rightarrow \exists x (P(x) \vee Q(x))$: \\
+Assume $\exists x P(x) \vee \exists x Q(x)$ is true. Then either $\exists x P(x)$ is true or $\exists x Q(x)$ is true. If $\exists x P(x)$ is true, then there exists an element $a$ in the domain such that $P(a)$ is true. So $P(a) \vee Q(a)$ is true, and $\exists x (P(x) \vee Q(x))$ is true. If $\exists x Q(x)$ is true, then there exists an element $b$ in the domain such that $Q(b)$ is true. So $P(b) \vee Q(b)$ is true, and $\exists x (P(x) \vee Q(x))$ is true.\\
+\\ \hspace*{\fill} \\
+So we have proved $\exists x (P(x) \vee Q(x)) \equiv \exists x P(x) \vee \exists x Q(x)$ \\
+\\ \hspace*{\fill} \\
+\section{Problem 6}
+$\forall x (P(x) \rightarrow Q(x)) \Rightarrow (\forall x P(x) \rightarrow \forall x Q(x))$\\
+Assume $\forall x (P(x) \rightarrow Q(x))$ is true. Then for any element $a$ in the domain, $P(a) \rightarrow Q(a)$ is true. If $\forall x P(x)$ is true, then for any element $b$ in the domain, $P(b)$ is true. So $Q(b)$ is true, and $\forall x Q(x)$ is true. So $\forall x P(x) \rightarrow \forall x Q(x)$ is true.\\
+\\ \hspace*{\fill} \\
+\section{Problem 7}
+Premises: $\forall x (F(x) \rightarrow (G(y) \wedge R(x)))$, $\exists x F(x)$.\\
+Conclusion: $\exists x (F(x) \wedge R(x))$\\
+\\ \hspace*{\fill} \\
+Proof: \\
+(1): $\forall x (F(x) \rightarrow (G(y) \wedge R(x)))$ Premise\\
+(2): $\exists x F(x)$ Premise\\
+(3): $F(a)$ Existential Instantiation of (2)\\
+(4): $F(a) \rightarrow (G(y) \wedge R(a))$ Universal Instantiation of (1)\\
+(5): $G(y) \wedge R(a)$ Modus Ponens of (3) and (4)\\
+(6): $F(a) \wedge R(a)$ Conjunction of (3) and (5)\\
+(7): $\exists x (F(x) \wedge R(x))$ Existential Generalization of (6)\\
+\\ \hspace*{\fill} \\
+\section{Problem 8}
+Premises: $\forall x (F(x) \vee G(x))$, $\forall x (\neg G(x) \vee \neg R(x))$, $\forall x R(x)$\\
+Conclusion: $\forall x F(x)$\\
+\\ \hspace*{\fill} \\
+Proof: \\
+(1): $\forall x (F(x) \vee G(x))$ Premise\\
+(2): $\forall x (\neg G(x) \vee \neg R(x))$ Premise\\
+(3): $\forall x R(x)$ Premise\\
+(4): $F(a) \vee G(a)$ Universal Instantiation of (1)\\
+(5): $\neg G(a) \vee \neg R(a)$ Universal Instantiation of (2)\\
+(6): $R(a)$ Universal Instantiation of (3)\\
+(7): $\neg G(a)$ Disjunctive Syllogism of (5) and (6)\\
+(8): $F(a)$ Disjunctive Syllogism of (4) and (7)\\
+(9): $\forall x F(x)$ Universal Generalization of (8)\\
+\\ \hspace*{\fill} \\
+\section{Problem 9}
+Premises: 1.All PhD students are hardworking. 2.Any person who is hardworking and smart will have a successful career. 3.Sam is a PhD student and smart.\\
+Conclusion: Sam will have a successful career.\\
+\\ \hspace*{\fill} \\
+Let $P(x)$ be the proposition "x is a PhD student", $H(x)$ be the proposition "x is hardworking", $S(x)$ be the proposition "x is smart", and $C(x)$ be the proposition "x will have a successful career".\\
+\\ \hspace*{\fill} \\
+Building Arguments:\\
+(1): $\forall x (P(x) \rightarrow H(x))$ Premise\\
+(2): $\forall x ((H(x) \wedge S(x)) \rightarrow C(x))$ Premise\\
+(3): $P(Sam)$ Premise\\
+(4): $S(Sam)$ Premise\\
+(5): $P(Sam) \rightarrow H(Sam)$ Universal Instantiation of (1)\\
+(6): $H(Sam)$ Modus Ponens of (3) and (5)\\
+(7): $H(Sam) \wedge S(Sam)$ Conjunction of (6) and (4)\\
+(8): $(H(Sam) \wedge S(Sam)) \rightarrow C(Sam)$ Universal Instantiation of (2)\\
+(9): $C(Sam)$ Modus Ponens of (7) and (8)\\
+So we have proved Sam will have a successful career.\\
+\\ \hspace*{\fill} \\
+\section{Problem 10}
+Premises: 1.There doesn’t exist an irrational number that can be expressed as a fraction. 2.All rational numbers can be expressed as fractions.\\
+Conclusion: Rational numbers are not irrational numbers.\\
+\\ \hspace*{\fill} \\
+Let $R(x)$ be the proposition "x is a rational number", $I(x)$ be the proposition "x is an irrational number", and $F(x)$ be the proposition "x can be expressed as a fraction".\\
+\\ \hspace*{\fill} \\
+Building Arguments:\\
+(1): $\neg \exists x (I(x) \wedge F(x))$ Premise\\
+(2): $\forall x (R(x) \rightarrow F(x))$ Premise\\
+(3): $\forall x (\neg (I(x) \wedge F(x)))$ De Morgan's Law of (1)\\
+(4): $\forall x (\neg I(x) \vee \neg F(x))$ De Morgan's Law of (3)\\
+(5): $\forall x (\neg R(x) \vee F(x))$ Equivalence of (2)\\
+(6): $\forall x (\neg I(x) \vee \neg F(x)) \wedge (\neg R(x) \vee F(x))$ Conjunction of (4) and (5)\\
+(7): $\forall x (\neg I(x) \vee \neg R(x))$ Resolution of (6)\\
+(8): $\neg \exists x \neg (\neg I(x) \vee \neg R(x))$ De Morgan's Law of (7)\\
+(9): $\neg \exists x (I(x) \wedge R(x))$ Double Negation of (8)\\
+So we have proved Rational numbers are not irrational numbers.\\
+\end{document}

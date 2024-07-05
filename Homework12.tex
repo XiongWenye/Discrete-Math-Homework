@@ -1,0 +1,131 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{subfigure} 
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{seqsplit}
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=C++,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+\author{Wenye Xiong 2023533141}
+\title{Homework 12}
+\begin{document}
+\maketitle
+
+\section{Problem 1}
+For the graph $G_1$, $K(G_1) = 1$, $\lambda(G_1) = 3$, $\delta(G_1) = 3$. And it is clear that $K(G_1) \leq \lambda(G_1) \leq \delta(G_1)$.\\
+\\ \hspace*{\fill} \\
+For the graph $G_2$, $K(G_2) = 2$, $\lambda(G_2) = 2$, $\delta(G_2) = 3$. And it is clear that $K(G_2) \leq \lambda(G_2) \leq \delta(G_2)$.\\
+\\ \hspace*{\fill} \\
+For the graph $G_3$, $K(G_3) = 4$, $\lambda(G_3) = 4$, $\delta(G_3) = 4$. And it is clear that $K(G_3) \leq \lambda(G_3) \leq \delta(G_3)$.\\
+\section{Problem 2}
+The graph G below is not connected. For the connected components of G, we have the following:\\
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{connectedcom.jpg}
+\end{figure}
+\newpage
+\section{Problem 3}
+It suffices to show that if a connected graph G has a bridge, then it must have an odd vertex.\\
+To this end, suppose that e = uv is a bridge in G. If either u or v is of odd degree, we have nothing to do. Thus, suppose that both u and v have even degrees. And since the graph is connected, the degrees of u and v
+must be at least 2.\\
+Now e a bridge of G implies that G - e is the disjoint union
+of a component that contains u, and a component H that contains v.\\
+Clearly, $deg_H(v) = deg_{G-e}(v) = deg_G(v) - 1$, and consider any different vertex w in H. Then $deg_H(w) = deg_{G-e}(w) = deg_G(w)$.\\
+Consequently, $deg_H(v)$ is odd, and applying the Handshaking Theorem to H, we have that there must be a vertex of odd degree in H, which is also an odd vertex of G\\
+So we have shown that if G has a bridge, then it must have an odd vertex. And thus prove that if G contains no vertices of odd degree then G is bridgeless.\\
+\section{Problem 4}
+A connected graph G
+ has an Euler circuit if and only if all of its vertices have even degree; it has an Euler path but no Euler circuit if and only if it has exactly two vertices of odd degree. Each vertex in Km,n
+ has degree m
+ or n\\
+ So $K{m,n}$ has an Euler circuit and an Euler Path
+ if and only if m
+ and n
+ are both even.\\
+\\ \hspace*{\fill} \\
+If m,n are both odd, then $K{m,n}$ has no Euler circuit and no Euler path given m and n are both not 1. If m=n=1, then the graph has an Euler path but no Euler circuit obviously.\\
+\\ \hspace*{\fill} \\
+If m is even and n is odd or vice versa, then $K{m,n}$ has a Euler path when m or n is 2. \\
+\\ \hspace*{\fill} \\
+So in general, $K{m,n}$ has an Euler circuit if and only if m and n are both even. It has an Euler path when m and n are both even or one of them is 2, the other is odd; or both of them equal to 1.\\
+\newpage
+\section{Problem 5}
+(a):\\
+The problem can be simplified to the following: we have a graph G and we want to verify whether G has an Euler Path.\\
+\\ \hspace*{\fill} \\
+Thus, for the first graph, it has two vertices of degree 3, and the rest of the vertices have even degrees(two 2s, five 4s). So it has an Euler Path. We can draw it without lifting the pen.\\
+\\ \hspace*{\fill} \\
+For the second graph, it has four vertices of degree 3, and the rest of the vertices have degrees 2. So it doesn't have an Euler Path. We can't draw it without lifting the pen.\\
+\\ \hspace*{\fill} \\
+For the third graph, all of its vertices have odd degrees 3, so it doesn't have an Euler Path. We can't draw it without lifting the pen.\\
+\\ \hspace*{\fill} \\
+(b):\\
+The first and second graphs admit Hamiltonian circuits shown below.\\
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{Ham.jpg}
+\end{figure}\\
+The third graph doesn't admit a Hamilton circuit. Consider the vertex a, b, c. They all have degree 2, so a Hamilton circuit must tranverses all edges. Thus we are actually tring to find an Euler Circuit. However, there are two vertices of degree 3. So there doesn't exist a Euler Circuit, thus we can not admit a Hamilton Circuit.\\
+\\ \hspace*{\fill} \\
+(c):\\
+For the first graph, it has an Euler Circuit(also an Euler Path) shown below.\\
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{G1_EU.jpg}
+\end{figure}\\
+For the second graph, it doesn't have an Euler Circuit nor an Euler Path. Because there are eight vertices of degree 3.\\
+\\ \hspace*{\fill} \\
+For the third graph, it has an Euler Path but not an Euler Circuit shown below.\\
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{G3_EU.jpg}
+\end{figure}\\
+For the fourth graph, it has an Euler Circuit shown below.\\
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{G4_EU.jpg}
+\end{figure}\\
+\section{Problem 6}
+Assume that G is disconnected, that means V can be partitioned into two nonempty sets A and B such that there is no edge between any two vertices in A or B.\\
+If every vertex has a degree at least p, then any such partition must have at least (p+1) vertices in A and (p+1) vertices in B. But this is impossible since G has only 2p vertices.\\
+Thus, G must be connected.\\
+\\ \hspace*{\fill} \\
+This is the same result when a simple graph with n vertices, each of degree at least $\frac{n-1}{2}$ is connected.\\
+Assume that G is disconnected, that means V can be partitioned into two nonempty sets A and B such that there is no edge between any two vertices in A or B.\\
+If every vertex has a degree at least $\frac{n-1}{2}$, then any such partition must have at least $\frac{n-1}{2} + 1$ vertices in A and $\frac{n-1}{2} + 1$ vertices in B. In total this is at least n+1 vertices. But this is impossible since G has only n vertices.\\
+\section{Problem 7}
+The graph is shown below.\\
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{t7.jpg}
+\end{figure}
+The graph doesn't have an Euler Circuit nor an Euler Path. Because there are four vertices of degree 3.\\
+\section{Problem 8}
+Since $M^n$ is not the zero matrix, there is a path of length n from some vertex i to some vertex j.\\
+Assume that the graph G does not contain any circuit. That means we can't visit the same vertex twice during this n length path. And in total we have visited n+1 vertices.
+However, since there are only n vertices, we must visit at least one same vertex twice during this n length path. Thus, we have find a contradiction.\\
+Thus, G contains at least one circuit.\\
+
+
+\end{document}

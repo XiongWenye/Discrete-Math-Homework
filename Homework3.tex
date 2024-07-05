@@ -1,0 +1,149 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{subfigure} 
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{listings}
+\usepackage{color}
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=Python,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+\author{Wenye Xiong 2023533141}
+\title{Homework 1}
+\begin{document}
+\maketitle
+
+\section{Problem 1}
+\\ \hspace*{\fill} \\
+
+\linebreak
+\begin{lstlisting}
+def SquareAndMutiply(a, e, n):
+    b = bin(e)[2:]
+    b = b[::-1]
+    ans = 1
+    for i in range(len(b)):
+        if b[i] == '1':
+            ans = (a * ans) % n
+        a = (a * a) % n
+    return ans
+
+base, exponent, modulus = map(int, input().split())
+print(SquareAndMutiply(base, exponent, modulus))
+\end{lstlisting}
+\\ \hspace*{\fill} \\
+The result is 1948938994538604160707108181724192091954263523362311673846915505520625915922643693886\\546508713351109692750915684157878314121214348919992352909799653979265473350527870681252083094220\\999190031833643580240890724902076377092268223725090951395199481472410255314243260591665020918693\\044381737199432444238061823906089977020969899711341059639979159572739419600905336781673188368650\\468710718164832109499409767199530541904080512081403155559058709882347747147418230358814131381147\\208291328747857991048977465984265721979324595417184750317001715144073738047884018946037845800547\\6484742953848813170374548455806977675820760128018344\\
+\\ \hspace*{\fill} \\
+\newpage
+\section{Problem 2}
+\begin{lstlisting}
+def extended_euclidean_algorithm(a, b):
+    if b == 0:
+        return 1, 0
+    else:
+        s, t = extended_euclidean_algorithm(b, a % b)
+        return t, s - (a // b) * t
+
+a, b = map(int, input().split())
+s, t = extended_euclidean_algorithm(a, b)
+print(s, t)
+\end{lstlisting}
+\\ \hspace*{\fill} \\
+The result is:\\
+s = 52693465174047597579174064083061206575761398656935114430811243560695066306956237700638467741\\380344513260983625906545194154800126707869242528199250303471171536207597896008405650134889458156\\325490296036336342644796958477425288398387518178265890700656305714837368523496597321973212197144\\244237647291270529201589\\
+t = -49224356025570205752640369113197589784192495362440084201087757193437212741118960024592916678\\950802342924534115789543242617936510771866636258909484003508425128530601681164598597924839372243\\612858504002463817184486904388029971268441911219848844590762141055813365169533361189741247565502\\362579257453658280613873\\
+\\ \hspace*{\fill} \\
+\newpage
+\section{Problem 3}
+\subsection{1}
+Consider the induction on i:\\
+\\ \hspace*{\fill} \\
+For i = 0, the statement is clear. $s_0 = 1, t_0 = 0, s_1 = 0, t_1 = 1$, $s_0t_1 - t_0s_1 = 1$\\
+\\ \hspace*{\fill} \\
+For i = 1, 2,...., k, we have:\\
+\centerline{$s_it_{i+1} - t_is_{i+1} = s_i(t_{i-1}-t_iq_i) - t_i(s_{i-1}-s_iq_i)$}\\
+\centerline{$= s_it_{i-1} - t_is_{i-1}$}\\
+\centerline{$= -(s_{i-1}t_i - t_{i-1}s_i$)}\\
+So according to the induction, \\
+\centerline{$s_it_{i+1} - t_is_{i+1} = -(-1)^{i-1}$}\\
+\centerline{$= (-1)^i$}\\
+\\ \hspace*{\fill} \\
+\subsection{2}
+We can also easily prove both statements by induction on i:\\
+\\ \hspace*{\fill} \\
+Both statements are obviously true for i = 0: $t_0 = 0, t_1 = 1, t_0t_1 = 0, |t_0| \leq |t_1|$\\
+\\ \hspace*{\fill} \\
+For i = 1,....,k, we have $t_{i+1} = t{i-1} - t_iq_i$\\
+And by the induction hypothesis, $t_{i-1}, t_i$ have opposite signs and $|t_i| \geq |t_{i-1}|$\\
+\\ \hspace*{\fill} \\
+So it leads to $|t_{i+1}| = |t_{i-1}| + |t_i|q_i$\\
+Because $q_i \geq i$, so $|t_{i+1}| \geq |t_i|$. Plus that $t_{i+1} = t{i-1} - t_iq_i$, $t_{i-1}, t_i$ have opposite signs, $|t_{i+1}|$ and  $|t_i|$ also have opposite signs, which leads to $t_{i+1}t_i \leq 0.$\\
+\\ \hspace*{\fill} \\
+\newpage
+\section{Problem 4}
+First we consider the two equations:\\
+\centerline{$as_{i-1} + bt_{i-1} = r_{i-1}$}\\
+\centerline{$as_i + bt_i = r_i$}\\
+Subtracting $t_{i-1}$ times the second equation from $t_i$ times the first, we get:\\
+\centerline{$ as_{i-1}t_i - as_it_{i-1} = r_{i-1}t_i - r_it_{i-1}$}\\
+\\ \hspace*{\fill} \\
+According to the result of problem 3, we have $s_{i-1}t_i - t_{i-1}s_i = (-1)^i$, apply this equation, we get:\\
+\centerline{$r_{i-1}t_i - r_it_{i-1} = \pm a$}\\
+Using the result of problem 3, $t_i$ and $t_{i-1}$ have opposite signs, we have: \\
+\centerline{$ a = r_{i-1}|t_i| + r_i|t_{i-1}|$}\\
+Obviously, $a \geq r_{i-1}|t_i|$ for i = 1,2,....k+1.\\
+\\ \hspace*{\fill} \\
+Follow from this, because $ a > 0$, then $r_{i-1} > 0$ for i=1,2,....k+1.\\ 
+$r_{i-1}$ is an integer, so $r_{i-1} \geq 1$ for i=1,2,....k+1. That means $|t_i| \leq a$ for i=1,2,....k+1.\\
+\\ \hspace*{\fill} \\
+\section{Problem 5}
+To determine the set of Fermat liars for n=21, we first consider the factors of 21, which are 3 and 7.\\
+\\ \hspace*{\fill} \\
+If $a^{20} \equiv 1 \pmod{21}$, then $a^{20} \equiv 1 \pmod{3}$ and $a^{20} \equiv 1 \pmod{7}$.\\
+According to Fermat's little theorem, $a^{2} \equiv 1 \pmod{3}$ and $a^{6} \equiv 1 \pmod{7}$ for all integers $a \in [1,n-1] $ and cannot divide 3 or 7\\
+\\ \hspace*{\fill} \\
+So to satisfy the equation $a^{20} \equiv 1 \pmod{3}$, $a$ must be in $[1]_3$ or $[2]_3$. To satisfy the equation $a^{20} \equiv 1 \pmod{7}$, $a^2 \equiv 1 \pmod{7}$. Which means $a$ must be in $[1]_7$ or $[6]_7$. These include 1,6,8,13,15,20.\\
+\\ \hspace*{\fill} \\
+For 1,6,8,13,15,20, examine if they are in $[1]_3$ or $[2]_3$. Finally we get 1,8,13,20 which are Fermat Liars.\\
+\\ \hspace*{\fill} \\
+Then according to Chinese Reminder Theorem, the answer is 1,8,13,20. \\
+\section{Problem 6}
+We observe that $ax \equiv b \pmod{n} \iff n | ax-b \iff (\frac{n}{d})|[(\frac{a}{d})x - (\frac{b}{d})]$\\
+That is, x is a solution of $ax \equiv b \pmod{n}$ if and only if x is a solution of $(\frac{a}{d})x \equiv (\frac{b}{d}) \pmod{(\frac{n}{d})}$\\
+\\ \hspace*{\fill} \\
+Now, because $d = gcd(a,n)$, $\frac{a}{d}$ and $\frac{n}{d}$ are relatively prime. So there is only one residue class $t = (\frac{a}{d})^{-1} \pmod{\frac{n}{d}}$\\
+\\ \hspace*{\fill} \\
+So s= $\frac{b}{d}t$ is a solution of $(\frac{a}{d})x \equiv (\frac{b}{d}) \pmod{(\frac{n}{d})}$, and also a solution of $ax \equiv b \pmod{n}$\\
+Consider the residue classes $s, s+n/d, s+2n/d,....,s+(d-1)n/d$, they are all solutions of $ax \equiv b \pmod{n}$.So last thing is we need to prove that $s+(d-1)n/d < n$ \\
+That is to prove $s < \frac{n}{d}$\\
+\\ \hspace*{\fill} \\
+Suppose that s is the smallest number to satisfy $(\frac{a}{d})x \equiv (\frac{b}{d}) \pmod{(\frac{n}{d})}$, if $s \geq \frac{n}{d}$,then we have:\\
+\\ \hspace*{\fill} \\
+\centerline{$(s-\frac{n}{d})\frac{a}{d} = \frac{a}{d}s - \frac{a}{d}\frac{n}{d} \equiv (\frac{b}{d}) \pmod{(\frac{n}{d})$}}\\
+\\ \hspace*{\fill} \\
+So s must be smaller than $\frac{n}{d}$, and the proof is complete.\\
+\\ \hspace*{\fill} \\
+After all, among all the residue classes modulo n, the residue classes represented by\\
+\\ \hspace*{\fill} \\
+\centerline{$\frac{b}{d}t, \frac{b}{d}t+\frac{n}{d}, \frac{b}{d}t+2\frac{n}{d},....,\frac{b}{d}t+(d-1)\frac{n}{d}$}\\
+\\ \hspace*{\fill} \\
+are the only ones that are solutions of $ax \equiv b \pmod{n}$.\\
+\end{document}

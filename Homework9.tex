@@ -1,0 +1,119 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{subfigure} 
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{seqsplit}
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=C++,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+\author{Wenye Xiong 2023533141}
+\title{Homework 9}
+\begin{document}
+\maketitle
+\section{Problem 1}
+Let $A = (\neg p \vee q) \wedge (r \rightarrow \neg q)$, $B = p \rightarrow \neg r$. We need to prove that $A \rightarrow B \equiv T$\\
+\\ \hspace*{\fill} \\
+$A \rightarrow B = (\neg p \vee q) \wedge (r \rightarrow \neg q) \rightarrow (p \rightarrow \neg r)$\\
+$= \neg ((\neg p \vee q) \wedge (r \rightarrow \neg q)) \vee (p \rightarrow \neg r)$\\
+$= (\neg (\neg p \vee q) \vee \neg (r \rightarrow \neg q)) \vee (p \rightarrow \neg r)$\\
+$= ((p \wedge \neg q) \vee (r \wedge q)) \vee (p \rightarrow \neg r)$\\
+$= (p \wedge \neg q) \vee (r \wedge q) \vee (\neg p \vee \neg r)$\\
+$= (p \wedge \neg q) \vee (r \wedge q) \vee \neg p \vee \neg r$\\
+$= (p \wedge \neg q) \vee \neg p \vee (r \wedge q) \vee \neg r$\\
+$= \neg q \vee \neg p \vee q \vee \neg r$\\
+$= T$\\
+\section{Problem 2}
+Let $A = (p \rightarrow q \vee r) \wedge (q \rightarrow s) \wedge (r \rightarrow \neg p)$, $B = p \rightarrow s$. We need to prove that $A \wedge \neg B \equiv F$\\
+\\ \hspace*{\fill} \\
+$A \wedge \neg B = (p \rightarrow q \vee r) \wedge (q \rightarrow s) \wedge (r \rightarrow \neg p) \wedge \neg (p \rightarrow s)$\\
+$= (\neg p \vee (q \vee r)) \wedge (\neg p \vee s) \wedge (\neg r \vee \neg p) \wedge \neg (\neg p \vee s)$\\
+$= (\neg p \vee q \vee r) \wedge (\neg p \vee s) \wedge (\neg r \vee \neg p) \wedge (p \wedge \neg s)$\\
+$= (\neg p \vee q \vee r) \wedge (\neg p \vee s) \wedge (\neg r \vee \neg p) \wedge p \wedge \neg s$\\
+$= (\neg p \vee q \vee r) \wedge (p \wedge s) \wedge (\neg r \vee \neg p) \wedge \neg s$\\
+$= (\neg p \vee q \vee r) \wedge (\neg r \vee \neg p) \wedge p \wedge (s \wedge \neg s)$\\
+$= (\neg p \vee q \vee r) \wedge (\neg r \vee \neg p) \wedge F$\\
+$= F$\\
+\section{Problem 3}
+Let p be proposition "It rains", let q be proposition "it is foggy", let r be proposition "The sailing race will be held", and let t be proposition "The life saving demonstration will go on", and let u be proposition "The trophy will be awarded".\\
+\\ \hspace*{\fill} \\
+Building Arguments:\\
+(1): $\neg u$ Premise\\
+(2): $r \implies u$ Premise\\
+(3): $\neg r$ Modus Tollens of (1) and (2)\\
+(4): $(\neg p \vee \neg q) \implies (r \wedge t)$ Premise\\
+(5): $\neg (r \wedge t) \implies \neg (\neg p \vee \neg q)$ Contrapositive of (4)\\
+(6): $\neg r \vee \neg t \implies (p \wedge q)$ Equivalence of (5)\\
+(7): $\neg r \vee \neg t$ Addition of (3)\\
+(8): $p \wedge q$ Modus Ponens of (6) and (7)\\
+(9): p Simplification of (8)\\
+
+
+\section{Problem 4}
+Premises: $p \wedge q \rightarrow r$, $\neg r \vee s$, $p \rightarrow \neg s$\\
+\\ \hspace*{\fill} \\
+Conclusion: $p \rightarrow \neg q$\\
+\\ \hspace*{\fill} \\
+(1): $p \wedge q \rightarrow r$ Premise\\
+(2): $\neg r \vee s$ Premise\\
+(3): $p \rightarrow \neg s$ Premise\\
+(4): $\neg p \vee \neg s$ Equivalence of (3)\\
+(5): $\neg p \vee \neg r$ Resolution of (2) and (4)\\
+(6): $p \rightarrow \neg r$ Equivalence of (5)\\
+(7): $r \rightarrow \neg p$ Contrapositive of (6)\\
+(8): $(p \wedge q) \rightarrow \neg p$ Rule of Inference from (1) and (7)\\
+(9): $\neg (p \wedge q) \vee \neg p$ Equivalence of (8)\\
+(10): $\neg p \vee \neg q \vee \neg p$ De Morgan's Law of (9)\\
+(11): $\neg p \vee \neg p \vee \neg q$ Commutative Law of (10)\\
+(12): $\neg p \vee \neg q$ Idempotent Law of (11)\\
+(13): $p \rightarrow \neg q$ Equivalence of (12)\\
+\section{Problem 5}
+Premises: $p_1 \rightarrow (q_1 \rightarrow r_1)$, $p_2 \rightarrow (q_2 \rightarrow r_2)$, $p_3 \rightarrow (q_3 \rightarrow r_3)$, $\cdots$, $p_n \rightarrow (q_n \rightarrow r_n)$, $q_1 \wedge q_2 \wedge q_3 \wedge \cdots \wedge q_n$\\
+\\ \hspace*{\fill} \\
+Conclusion: $(p_1 \rightarrow r_1) \wedge (p_2 \rightarrow r_2) \wedge (p_3 \rightarrow r_3) \wedge \cdots \wedge (p_n \rightarrow r_n)$\\
+\\ \hspace*{\fill} \\
+(1): $p_i \rightarrow (q_i \rightarrow r_i)$ Premise\\
+(2): $q_1 \wedge q_2 \wedge q_3 \wedge \cdots \wedge q_n$ Premise\\
+(3): $q_i$ Simplification of (2)\\
+(4): $\neg p_i \vee r_i$ Equivalence of (1), (3)\\
+(5): $p_i \rightarrow r_i$ Equivalence of (4)\\
+(6): $(p_1 \rightarrow r_1) \wedge (p_2 \rightarrow r_2) \wedge (p_3 \rightarrow r_3) \wedge \cdots \wedge (p_n \rightarrow r_n)$ Conjunction of (5)\\
+\section{Problem 6}
+(a): True\\
+(b): False\\
+(c): True\\
+(d): True\\
+\section{Problem 7}
+Let p be proposition "A is the suspect", q be proposition "A visited the victim's room", r be proposition "A leave before 2 am", s be proposition "The hotel staff saw A".\\
+\\ \hspace*{\fill} \\
+Building Arguments:\\
+(1): $(q \wedge \neg r) \rightarrow p$ Premise\\
+(2): $q$ Premise\\
+(3): $r \rightarrow s$ Premise\\
+(4): $\neg s$ Premise\\
+(5): $\neg s \rightarrow \neg r$ Contrapositive of (3)\\
+(6): $\neg r$ Modus Ponens of (4) and (5)\\
+(7): $q \wedge \neg r$ Conjunction of (2) and (6)\\
+(8): $p$ Modus Ponens of (1) and (7)\\
+So we have proved A is the suspect.\\
+\end{document}

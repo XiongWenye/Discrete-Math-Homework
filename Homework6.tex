@@ -1,0 +1,223 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{subfigure} 
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{seqsplit}
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=C++,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+\author{Wenye Xiong 2023533141}
+\title{Homework 5}
+\begin{document}
+\maketitle
+\section{Problem 1}
+\\ \hspace*{\fill} \\
+First, we will find the number of T-Routes from $A(0,0)$ to $B(7,5)$\\
+\\ \hspace*{\fill} \\
+This number is $\frac{(b-a)!}{(\frac{b-a}{2} + \frac{\beta - \alpha}{2})! (\frac{b-a}{2} - \frac{\beta - \alpha}{2})!}$, where a=0, b=7, $\alpha$=0, $\beta$=5. And we can get 7 is the number of T-Routes.\\
+\\ \hspace*{\fill} \\
+Then, we will list all the T-Routes.\\
+\\ \hspace*{\fill} \\
+$\overline{(0,0),(1,-1),(2,0),(3,1),(4,2),(5,3),(6,4),(7,5)}$ \ $\overline{(0,0),(1,1),(2,0),(3,1),(4,2),(5,3),(6,4),(7,5)}$ \ $\overline{(0,0),(1,1),(2,2),(3,1),(4,2),(5,3),(6,4),(7,5)}$ \ $\overline{(0,0),(1,1),(2,2),(3,3),(4,2),(5,3),(6,4),(7,5)}$ \ $\overline{(0,0),(1,1),(2,2),(3,3),(4,4),(5,3),(6,4),(7,5)}$ \ $\overline{(0,0),(1,1),(2,2),(3,3),(4,4),(5,5),(6,4),(7,5)}$ \ $\overline{(0,0),(1,1),(2,2),(3,3),(4,4),(5,5),(6,6),(7,5)}$ \ \\
+\\ \hspace*{\fill} \\
+\newpage
+\section{Problem 2}
+\\ \hspace*{\fill} \\
+To show that if A, B satisfy the T-condition, then there is a T-route from A to B, we can simply offer a possible T-Route.\\
+\\ \hspace*{\fill} \\
+Consider b-a steps, for the first $|\beta-\alpha|$ steps, we move in the direction of $\beta$-$\alpha$. That is if $\beta$-$\alpha$ is positive, we move in the direction of upper right, otherwise we move in the direction of lower right.\\
+\\ \hspace*{\fill} \\
+After the first $|\beta-\alpha|$ steps, we are now at (a+$|\beta-\alpha|$, $\beta$). \\
+\\ \hspace*{\fill} \\
+Because A, B satisfy the T-condition, a+$|\beta-\alpha|$ is smaller than b. For the next b-(a+$|\beta-\alpha|$) steps, we take two steps as a unit: For each unit, we move in the direction of upper right for the first step, and move in the direction of lower right for the second step.\\
+\\ \hspace*{\fill} \\
+Because $2|(b - a + \beta - \alpha)$, we also have $2|(b - a - \beta + \alpha)$. So $2|b-(a+|\beta-\alpha|)$, and we can take the next b-(a+$|\beta-\alpha|$) steps as $\frac{b-(a+|\beta-\alpha|)}{2}$ units.\\
+\\ \hspace*{\fill} \\
+For each units, we are actually moving in the direction of right for two steps. So after b-(a+$|\beta-\alpha|$) steps, we are now at (b, $\beta$), which is B.\\
+\\ \hspace*{\fill} \\
+This is a T-route. So we have shown that if A, B satisfy the T-condition, then there is a T-route from A to B.\\
+\\ \hspace*{\fill} \\
+\newpage
+\section{Problem 3}
+\\ \hspace*{\fill} \\
+We are very clear that $x_1$ can only be 0. So we can take every $x_i $ as $x_{i-1}$ and throw away the stupid $x_1$.After that the system is reduced to:\\
+\\ \hspace*{\fill} \\
+\begin{align*}
+  \begin{cases}
+    $x_1 + x_2 + x_3 +....+ x_{2n} = n$\\
+    $x_1 + x_2 + x_3 +....+ x_{i-1} < \frac{i}{2} $\\
+    $x_i \in \{0,1\}$ \\
+  \end{cases}
+\end{align*} 
+\\ \hspace*{\fill} \\
+Further more, for the second case, $<\frac{i}{2}$ is just equal to $\leq \frac{i-1}{2}$, since the sum of $x_i$ can only be an integer.\\
+\\ \hspace*{\fill} \\
+So we can rewrite the system as:\\
+\\ \hspace*{\fill} \\
+\begin{align*}
+  \begin{cases}
+    $x_1 + x_2 + x_3 +....+ x_{2n} = n$\\
+    $x_1 + x_2 + x_3 +....+ x_{i} \leq \frac{i}{2} $\\
+    $x_i \in \{0,1\}$ \\
+  \end{cases}
+\end{align*}
+\\ \hspace*{\fill} \\
+That is just the typical case of Catalan number. So the number of solutions is $C_{2n}$, which is $\frac{(2n)!}{(n+1)!n!}$.\\ 
+\\ \hspace*{\fill} \\
+\newpage
+\section{Problem 4}
+\\ \hspace*{\fill} \\
+Consider $y_i = x_i - 1$, then we have $y_1 + y_2 + y_3 +....+ y_n = r - n$, where $y_i \geq 0$ and is an integer.\\
+\\ \hspace*{\fill} \\
+This corresponds to a choice of where to place n-1 addition signs in a row of r-n ones.\\
+\\ \hspace*{\fill} \\
+For example, let n=3 and r=6, then we have 111, $(1,1,1)$ is 1+1+1, and $(0,2,1)$ is +11+1\\
+\\ \hspace*{\fill} \\
+So totally we have r-1 signs(1 and +), and we need to choose n-1 places of signs to be +. This is just a set with r-1 elements $A=\{ (n-1) \cdot +, (r-n) \cdot 1\}$, so the number of solutions is 
+\begin{pmatrix}
+  r-1\\
+  n-1\\
+\end{pmatrix}
+\\ \hspace*{\fill} \\
+\newpage
+\section{Problem 5}
+Let U = $\{u_1, u_2, u_3, ..., u_n\}, V = \{v_1, v_2, v_3, ..., v_n\} $be two sets of n elements each.\\
+\\ \hspace*{\fill} \\
+Consider the set X = $\{ (A,B,C): A \subseteq U, |A| = 1, B \subseteq U \cup V, |B| = n-1, C \subseteq U \cup V, |C| = n. |A \cap B| = 0, |A \cap C| = 0, |B \cap C| = 0.\}$\\
+\\ \hspace*{\fill} \\
+If we choose A, then choose B, the rest are C, then: $|X| = n \cdot 
+\begin{pmatrix}
+  2n-1\\
+  n-1\\
+\end{pmatrix}$\\
+\\ \hspace*{\fill} \\
+Or, we assume that $|A \cup B \cap U| = r$, where r can be any integer from 1 to n. Then of course $|C \cap V| = r$, that means there are r elements in U that are in A or B, and there are r elements in V that are in C. We first choose $A \cup B$ from U, then we choose A from $A \cup B$. Lastly, we choose C from V. Then we have $|X| = \sum_{1}^{n} r
+\begin{pmatrix}
+  n\\
+  r\\
+\end{pmatrix} \cdot
+\begin{pmatrix}
+  n\\
+  r\\
+\end{pmatrix} $\\
+\\ \hspace*{\fill} \\
+So in conclusion, $\sum_{1}^{n}r \cdot 
+\begin{pmatrix}
+  n\\
+  r\\
+\end{pmatrix} \cdot
+\begin{pmatrix}
+  n\\
+  r\\
+\end{pmatrix} 
+ = n \cdot 
+\begin{pmatrix}
+  2n-1\\
+  n-1\\
+\end{pmatrix}$\\
+\\ \hspace*{\fill} \\
+\newpage
+\section{Problem 6}
+\\ \hspace*{\fill} \\
+$a_n = \sum_{k=s}^{n} (-1)^{n-k}
+\begin{pmatrix}
+  n\\
+  k\\
+\end{pmatrix} b_k$\\
+\\ \hspace*{\fill} \\
+Then we have:$\sum_{k=s}^{n} 
+\begin{pmatrix}
+  n\\
+  k\\
+\end{pmatrix} a_k = \sum_{k=s}^{n} 
+\begin{pmatrix}
+  n\\
+  k\\
+\end{pmatrix}\sum_{i=s}^{k} (-1)^{k-i}
+\begin{pmatrix}
+  k\\
+  i\\
+\end{pmatrix}b_i$
+$=\sum_{i=s}^{n} \sum_{k=i}^{n} (-1)^{k-i}
+\begin{pmatrix}
+  n\\
+  k\\
+\end{pmatrix}
+\begin{pmatrix}
+  k\\
+  i\\
+\end{pmatrix}b_i$\\
+\\ \hspace*{\fill} \\
+Because $\sum_{k=i}^{n} (-1)^{k-i}
+\begin{pmatrix}
+  n\\
+  k\\
+\end{pmatrix}
+\begin{pmatrix}
+  k\\
+  i\\
+\end{pmatrix} = \sum_{k=i}^{n} (-1)^{k-i}
+\begin{pmatrix}
+  n\\
+  i\\
+\end{pmatrix}
+\begin{pmatrix}
+  n-i\\
+  k-i\\
+\end{pmatrix} = 
+\begin{pmatrix}
+  n\\
+  i\\
+\end{pmatrix} \sum_{k=i}^{n} (-1)^{k-i} 
+\begin{pmatrix}
+  n-i\\
+  k-i\\
+\end{pmatrix} = 
+\begin{pmatrix}
+  n\\
+  i\\
+\end{pmatrix} \sum_{t=0}^{n-i} (-1)^t 
+\begin{pmatrix}
+  n-i\\
+  t\\
+\end{pmatrix} = 
+\begin{cases}
+  1,\ n=i\\
+  0,\ n > i\\
+\end{cases}$\\
+\\ \hspace*{\fill} \\
+So we have $\sum_{k=s}^{n} 
+\begin{pmatrix}
+  n\\
+  k\\
+\end{pmatrix} a_k =\sum_{i=s}^{n} \sum_{k=i}^{n} (-1)^{k-i}
+\begin{pmatrix}
+  n\\
+  k\\
+\end{pmatrix}
+\begin{pmatrix}
+  k\\
+  i\\
+\end{pmatrix}b_i = b_n$
+\end{document}
